@@ -29,10 +29,10 @@
 
 ```bash
 # 開発環境用コンテナを起動
-docker-compose --profile dev up ballbarrier-dev
+docker compose --profile dev up ballbarrier-dev
 
 # またはバックグラウンドで起動
-docker-compose --profile dev up -d ballbarrier-dev
+docker compose --profile dev up -d ballbarrier-dev
 ```
 
 **開発環境の特徴:**
@@ -53,10 +53,10 @@ docker-compose --profile dev up -d ballbarrier-dev
 
 ```bash
 # 本番環境用コンテナをビルド・起動
-docker-compose up ballbarrier-game
+docker compose up ballbarrier-game
 
 # またはバックグラウンドで起動
-docker-compose up -d ballbarrier-game
+docker compose up -d ballbarrier-game
 ```
 
 **本番環境の特徴:**
@@ -76,23 +76,23 @@ docker-compose up -d ballbarrier-game
 
 ```bash
 # 実行中のコンテナを確認
-docker-compose ps
+docker compose ps
 
 # ログを確認
-docker-compose logs ballbarrier-dev     # 開発環境
-docker-compose logs ballbarrier-game    # 本番環境
+docker compose logs ballbarrier-dev     # 開発環境
+docker compose logs ballbarrier-game    # 本番環境
 
 # コンテナを停止
-docker-compose down
+docker compose down
 
 # コンテナを停止してボリュームも削除
-docker-compose down -v
+docker compose down -v
 
 # イメージを再ビルド（Dockerfileに変更があった場合）
-docker-compose build ballbarrier-game
+docker compose build ballbarrier-game
 
 # キャッシュを無視して完全再ビルド
-docker-compose build --no-cache ballbarrier-game
+docker compose build --no-cache ballbarrier-game
 ```
 
 ### 4. トラブルシューティング
@@ -111,20 +111,20 @@ lsof -i :8080  # 本番環境
 ```bash
 # Docker環境の確認
 docker --version
-docker-compose --version
+docker compose --version
 
 # コンテナのログを詳細表示
-docker-compose logs -f ballbarrier-dev
+docker compose logs -f ballbarrier-dev
 
 # コンテナ内に入ってデバッグ
-docker-compose exec ballbarrier-dev sh
+docker compose exec ballbarrier-dev sh
 ```
 
 **ボリュームマウントの問題:**
 ```bash
 # 開発環境でnode_modulesが正しくマウントされない場合
-docker-compose down -v
-docker-compose --profile dev up ballbarrier-dev
+docker compose down -v
+docker compose --profile dev up ballbarrier-dev
 ```
 
 ## ローカル環境での起動方法
@@ -194,7 +194,7 @@ MIT License
 
 1. **開発環境を起動**:
    ```bash
-   docker-compose --profile dev up ballbarrier-dev
+   docker compose --profile dev up ballbarrier-dev
    ```
 
 2. **ソースコード編集**: `app/src/main.ts`や`app/index.html`を編集
@@ -205,7 +205,7 @@ MIT License
 
 1. **本番ビルドのテスト**:
    ```bash
-   docker-compose up ballbarrier-game
+   docker compose up ballbarrier-game
    ```
 
 2. **動作確認**: http://localhost:8080 でゲームが正常に動作することを確認
