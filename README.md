@@ -190,6 +190,32 @@ MIT License
 
 ## 開発者向け情報
 
+### IDE・エディタの使用方法
+
+開発環境コンテナには **Opencode** と **Claude Code** が導入されており、コンテナ内で直接使用できます。
+
+#### Opencode の使用方法
+
+```bash
+# コンテナ内でbashを開いてから実行
+docker compose exec ballbarrier-dev bash
+opencode .
+
+# または直接実行
+docker compose exec ballbarrier-dev opencode .
+```
+
+#### Claude Code の使用方法
+
+```bash
+# コンテナ内でbashを開いてから実行
+docker compose exec ballbarrier-dev bash
+claude-code
+
+# または直接実行
+docker compose exec ballbarrier-dev claude-code
+```
+
 ### コードの修正方法
 
 1. **開発環境を起動**:
@@ -198,6 +224,8 @@ MIT License
    ```
 
 2. **ソースコード編集**: `app/src/main.ts`や`app/index.html`を編集
+   - IDE: `docker compose exec ballbarrier-dev opencode .`
+   - AI支援: `docker compose exec ballbarrier-dev claude-code`
 
 3. **自動リロード**: ブラウザが自動的にリロードされ、変更が反映される
 
