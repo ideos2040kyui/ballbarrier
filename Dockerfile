@@ -1,8 +1,25 @@
+# Build stage
+FROM node:18-alpine AS builder
+
+WORKDIR /app
+
+# Copy package files
+COPY app/package.json app/package-lock.json* ./
+
+# Install dependencies
+RUN npm ci
+
+# Copy source code
+COPY app/ .
+
+# Build the application
+RUN npm run build
+
+# Production stage
 FROM nginx:alpine
 
-# Copy game files to nginx html directory
-COPY index.html /usr/share/nginx/html/
-COPY game.js /usr/share/nginx/html/
+# Copy built files to nginx html directory
+COPY --from=builder /app/dist /usr/share/nginx/html
 
 # Expose port 80
 EXPOSE 80
