@@ -7,7 +7,6 @@ services:
     ports:
       - "8080:80"
     container_name: ballbarrier-game
-    restart: unless-stopped
 
   # Development environment
   ballbarrier-dev:
