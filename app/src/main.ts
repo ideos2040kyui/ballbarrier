@@ -18,12 +18,11 @@ interface Line {
 
 class BallBarrierGame {
   private canvas: HTMLCanvasElement;
-  private scene: THREE.Scene;
-  private camera: THREE.OrthographicCamera;
-  private renderer: THREE.WebGLRenderer;
+  private scene!: THREE.Scene;
+  private camera!: THREE.OrthographicCamera;
+  private renderer!: THREE.WebGLRenderer;
   private balls: Ball[] = [];
   private lines: Line[] = [];
-  private boundaryWalls: THREE.Mesh[] = [];
   private gameStarted: boolean = false;
   private gameTime: number = 0;
   private lastTime: number = 0;
@@ -31,7 +30,6 @@ class BallBarrierGame {
   private currentLine: THREE.Line | null = null;
   private currentLinePoints: THREE.Vector3[] = [];
   private ballSpeed: number = 2;
-  private ballCount: number = 1;
   private nextBallSpawn: number = 5;
   private worldSize: number = 10;
   private boundarySize: number;
@@ -114,13 +112,12 @@ class BallBarrierGame {
       { pos: [-this.boundarySize/2, wallHeight/2, 0] as [number, number, number], size: [wallThickness, wallHeight, this.boundarySize] as [number, number, number] }
     ];
     
-    this.boundaryWalls = walls.map(wall => {
+    walls.forEach(wall => {
       const geometry = new THREE.BoxGeometry(...wall.size);
       const mesh = new THREE.Mesh(geometry, wallMaterial);
       mesh.position.set(...wall.pos);
       mesh.userData.isBoundary = true;
       this.scene.add(mesh);
-      return mesh;
     });
   }
 
@@ -360,7 +357,6 @@ class BallBarrierGame {
     this.gameStarted = true;
     this.gameTime = 0;
     this.ballSpeed = 2;
-    this.ballCount = 1;
     this.nextBallSpawn = 5;
     
     // Clear any existing balls and lines
