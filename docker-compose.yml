@@ -3,21 +3,23 @@ version: '3.8'
 services:
   # Production build
   ballbarrier-game:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
     ports:
       - "8080:80"
     container_name: ballbarrier-game
 
   # Development environment
   ballbarrier-dev:
-    image: node:18-alpine
-    working_dir: /app
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
     volumes:
       - ./app:/app
       - /app/node_modules
     ports:
       - "5173:5173"
     container_name: ballbarrier-dev
-    command: sh -c "npm install && npm run dev"
     profiles:
       - dev
